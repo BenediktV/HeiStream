@@ -43,7 +43,7 @@ public:
     virtual ~graph_io_stream();
 
     static
-    NodeID createModel(PartitionConfig &config, graph_access &G, std::vector <std::vector<LongNodeID>> *&input);
+    NodeID createModel(PartitionConfig &config, graph_access &G, std::vector <std::vector<LongNodeID>> *&input, bool useDegreeAsWeight);
 
     static
     void
@@ -166,7 +166,7 @@ public:
     void prescribeBufferInbalance(PartitionConfig &partition_config);
 
     static
-    void streamEvaluatePartition(PartitionConfig &config, const std::string &filename, EdgeWeight &edgeCut);
+    void streamEvaluatePartition(PartitionConfig &config, const std::string &filename, EdgeWeight &edgeCut, bool useDegreeAsWeight);
 
     static
     void loadRemainingLinesToBinary(PartitionConfig &partition_config, std::vector <std::vector<LongNodeID>> *&input);

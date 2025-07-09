@@ -28,7 +28,7 @@ graph_io_stream::~graph_io_stream() {
 
 
 NodeID
-graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vector <std::vector<LongNodeID>> *&input) {
+graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vector <std::vector<LongNodeID>> *&input, bool useDegreeAsWeight) {
     NodeWeight total_nodeweight = 0;
     NodeID node_counter = 0;
     EdgeID edge_counter = 0;
@@ -78,6 +78,11 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
             break;
     }
 
+    if (useDegreeAsWeight && read_nw) {
+        std::cerr << "You cannot run HeiStream with useDegreeAsWeight=true for a graph that already has node weights." << std::endl;
+        throw std::runtime_error("Invalid configuration: Trying to useDegreeAsWeight for a graph with node weights.");
+    }
+
     /* config.degree_nodeBlock = new std::vector<std::vector<EdgeWeight>> (config.nmbNodes, std::vector<EdgeWeight>(config.k,0)); */
     /* config.edge_block_nodes = new std::vector<std::vector<NodeID>> (config.k, std::vector<NodeID>()); */
     config.edge_block_nodes = new std::vector <std::vector<std::pair < NodeID, NodeWeight>> >
@@ -93,13 +98,16 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
         weight = 1;
         if (read_nw) {
             weight = line_numbers[col_counter++];
-            if (total_nodeweight > std::numeric_limits<NodeWeight>::max()) {
-                std::cerr << "The sum of the node weights is too large (it exceeds the node weight type)." << std::endl;
-                std::cerr << "Currently not supported. Please scale your node weights." << std::endl;
-                exit(0);
-            }
+        }
+        else if (useDegreeAsWeight) {
+            weight = (NodeWeight) (line_numbers.size() + 1);
         }
         total_nodeweight += weight;
+        if (total_nodeweight > std::numeric_limits<NodeWeight>::max()) {
+            std::cerr << "The sum of the node weights is too large (it exceeds the node weight type)." << std::endl;
+            std::cerr << "Currently not supported. Please scale your node weights." << std::endl;
+            exit(0);
+        }
         processNodeWeight(config, all_nodes, node, weight);
 
         while (col_counter < line_numbers.size()) {
@@ -781,9 +789,10 @@ void graph_io_stream::readFirstLineStream(PartitionConfig &partition_config, std
     partition_config.stream_n_nodes = partition_config.remaining_stream_nodes;
     partition_config.total_stream_edges = partition_config.remaining_stream_nodes;
 
-    auto total_weight = (partition_config.balance_edges) ? (partition_config.remaining_stream_nodes +
-                                                            2 * partition_config.remaining_stream_edges)
-                                                         : partition_config.remaining_stream_nodes;
+    // auto total_weight = (partition_config.balance_edges) ? (partition_config.remaining_stream_nodes +
+    //                                                         2 * partition_config.remaining_stream_edges)
+    //                                                      : partition_config.remaining_stream_nodes;
+    auto total_weight = partition_config.remaining_stream_nodes + 2 * partition_config.remaining_stream_edges;
 
     if (partition_config.num_streams_passes > 1 + partition_config.restream_number) {
         partition_config.stream_total_upperbound = ceil(
@@ -864,7 +873,7 @@ void graph_io_stream::prescribeBufferInbalance(PartitionConfig &partition_config
 }
 
 void
-graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::string &filename, EdgeWeight &edgeCut) {
+graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::string &filename, EdgeWeight &edgeCut, bool useDegreeAsWeight) {
     std::vector <std::vector<LongNodeID>> *input;
     std::vector <std::string> *lines;
     lines = new std::vector<std::string>(1);
@@ -874,7 +883,7 @@ graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::str
     std::ifstream in(filename.c_str());
     if (!in) {
         std::cerr << "Error opening " << filename << std::endl;
-        return 1;
+        return;
     }
     long nmbNodes;
     long nmbEdges;
@@ -896,6 +905,12 @@ graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::str
     } else if (ew == 10) {
         read_nw = true;
     }
+
+    if (useDegreeAsWeight && read_nw) {
+        std::cerr << "You cannot run HeiStream with useDegreeAsWeight=true for a graph that already has node weights." << std::endl;
+        throw std::runtime_error("Invalid configuration: Trying to useDegreeAsWeight for a graph with node weights.");
+    }
+
     NodeID target;
     NodeWeight total_nodeweight = 0;
     EdgeWeight total_edgeweight = 0;
@@ -915,6 +930,10 @@ graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::str
         NodeWeight weight = 1;
         if (read_nw) {
             weight = line_numbers[col_counter++];
+            total_nodeweight += weight;
+        }
+        else if (useDegreeAsWeight) {
+            weight = line_numbers.size()+1;
             total_nodeweight += weight;
         }
         while (col_counter < line_numbers.size()) {
