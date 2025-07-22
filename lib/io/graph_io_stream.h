@@ -325,14 +325,25 @@ graph_io_stream::loadLinesFromStreamToBinary(PartitionConfig &partition_config, 
     std::vector <std::string> *lines;
     lines = new std::vector<std::string>(1);
     LongNodeID node_counter = 0;
+    LongNodeID line_counter = 0;
     buffered_input *ss2 = NULL;
     while (node_counter < num_lines) {
         std::getline(*(partition_config.stream_in), (*lines)[0]);
-        if ((*lines)[0][0] == '%') { // a comment in the file
+        if ( (*lines)[0][0] == '%') { // a comment in the file
+            continue;
+        } else if (partition_config.use_reduced_graph && (*partition_config.reduced_mapping)[line_counter] == UNDEFINED_LONGNODE) {
+            line_counter++;
             continue;
         }
+        line_counter++;
+
         ss2 = new buffered_input(lines);
-        ss2->simple_scan_line((*input)[node_counter++]);
+        if (partition_config.use_reduced_graph) {
+            // std::cout << "Scan line reduce" << std::endl;
+            ss2->scan_line_reduce((*input)[node_counter++], partition_config.reduced_mapping);
+        } else {
+            ss2->simple_scan_line((*input)[node_counter++]);
+        }
         (*lines)[0].clear();
         delete ss2;
     }

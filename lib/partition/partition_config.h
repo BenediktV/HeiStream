@@ -15,6 +15,7 @@
 #include <sparsehash/dense_hash_map>
 #include <sparsehash/dense_hash_set>
 #include <unordered_set>
+#include <vector>
 
 typedef struct {
         PartitionID block;
@@ -28,6 +29,18 @@ class matrix;
 struct PartitionConfig
 {
         PartitionConfig() {}
+
+        //============================================================
+        //========ADDITIONS WHEN USING A REDUCED GRAPH================
+        //============================================================
+        
+        bool use_reduced_graph;
+        LongNodeID reduced_n;
+        LongEdgeID reduced_m;
+        LongNodeID pre_reduced_n;
+        LongEdgeID pre_reduced_m;
+        std::vector<LongNodeID>* reduced_mapping; // Maps the original node id to the reduced node id
+
 
 
         //============================================================

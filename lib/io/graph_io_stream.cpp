@@ -78,6 +78,11 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
             break;
     }
 
+    if (config.use_reduced_graph && read_ew) {
+        std::cerr << "Reducing graphs on the fly is not supported with edge weights." << std::endl;
+        throw std::runtime_error("Invalid configuration: Trying to reduce a graph with edge weights.");
+    }
+
     if (useDegreeAsWeight && read_nw) {
         std::cerr << "You cannot run HeiStream with useDegreeAsWeight=true for a graph that already has node weights." << std::endl;
         throw std::runtime_error("Invalid configuration: Trying to useDegreeAsWeight for a graph with node weights.");
@@ -767,6 +772,11 @@ void graph_io_stream::readFirstLineStream(PartitionConfig &partition_config, std
     ss >> partition_config.remaining_stream_edges;
     ss >> partition_config.remaining_stream_ew;
 
+    if (partition_config.use_reduced_graph) {
+        partition_config.remaining_stream_nodes = partition_config.reduced_n;
+        partition_config.remaining_stream_edges = partition_config.reduced_m;
+    }
+
     partition_config.total_nodes = partition_config.remaining_stream_nodes;
     partition_config.total_edges = partition_config.remaining_stream_edges;
 
@@ -915,15 +925,28 @@ graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::str
     NodeWeight total_nodeweight = 0;
     EdgeWeight total_edgeweight = 0;
     edgeCut = 0;
+    NodeID line_counter = 0;
 
     while (std::getline(in, (*lines)[0])) {
         if ((*lines)[0][0] == '%') continue; // a comment in the file
+
+        if (config.use_reduced_graph && (*config.reduced_mapping)[line_counter] == UNDEFINED_LONGNODE) {
+            line_counter++;
+            continue;
+        }
+        line_counter++;
+
         NodeID node = node_counter++;
         PartitionID partitionIDSource = (*config.stream_nodes_assign)[node];
 
         input = new std::vector <std::vector<LongNodeID>>(1);
         ss2 = new buffered_input(lines);
-        ss2->simple_scan_line((*input)[0]);
+        if (config.use_reduced_graph) {
+            ss2->scan_line_reduce((*input)[0], config.reduced_mapping);
+        } else {
+            ss2->simple_scan_line((*input)[0]);
+        }
+
         std::vector <LongNodeID> &line_numbers = (*input)[0];
         LongNodeID col_counter = 0;
 

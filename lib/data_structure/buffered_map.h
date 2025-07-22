@@ -91,6 +91,17 @@ class buffered_input {
 			}
 			this->row++;
 		}
+		void scan_line_reduce(std::vector<LongNodeID>& vec, std::vector<LongNodeID>* reduce_vec) {
+			vec.clear();
+			this->column = 0;
+			LongNodeID item = 0;
+			while (this->next_int(item)) {
+				if ((*reduce_vec)[item-1] != UNDEFINED_LONGNODE) {
+					vec.push_back((*reduce_vec)[item-1] + 1);
+				}
+			}
+			this->row++;
+		}
 	private:
 		bool next_int(LongNodeID& item) {
 			bool valid_number = false;
