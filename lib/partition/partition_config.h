@@ -41,7 +41,9 @@ struct PartitionConfig
         LongEdgeID pre_reduced_m;
         std::vector<LongNodeID>* reduced_mapping; // Maps the original node id to the reduced node id
 
-
+        bool weight_current_cut_edges;
+        std::vector<int>* previous_partitioning;
+        int cut_edge_weight;
 
         //============================================================
         //=======================MATCHING=============================

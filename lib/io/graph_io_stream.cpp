@@ -121,6 +121,11 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
             if (read_ew) {
                 edge_weight = line_numbers[col_counter++];
             }
+            else if (config.weight_current_cut_edges) {
+                if ((*config.previous_partitioning)[node] != (*config.previous_partitioning)[target-1]) {
+                    edge_weight = config.cut_edge_weight;
+                }
+            }
 
             if (target > config.upper_global_node) { // edge to future batch
                 processGhostNeighborInBatch(config, node, target, edge_weight);
@@ -966,6 +971,11 @@ graph_io_stream::streamEvaluatePartition(PartitionConfig &config, const std::str
             if (read_ew) {
                 edge_weight = line_numbers[col_counter++];
             }
+            else if (config.weight_current_cut_edges) {
+                if ((*config.previous_partitioning)[node] != (*config.previous_partitioning)[target]) {
+                    edge_weight = config.cut_edge_weight;
+                }
+            }
             total_edgeweight += edge_weight;
             PartitionID partitionIDTarget = (*config.stream_nodes_assign)[target];
             if (partitionIDSource != partitionIDTarget) {
@@ -1564,6 +1574,11 @@ void graph_io_stream::streamEvaluatePartitionEdgeBatch(PartitionConfig &config, 
                 EdgeWeight edge_weight = 1;
                 if (read_ew) {
                     edge_weight = line_numbers[col_counter++];
+                }
+                else if (config.weight_current_cut_edges) {
+                    if ((*config.previous_partitioning)[node] != (*config.previous_partitioning)[target]) {
+                        edge_weight = config.cut_edge_weight;
+                    }
                 }
                 total_edgeweight += edge_weight;
                 const EdgeID e = G_temp.new_edge(node, target);
