@@ -37,8 +37,7 @@ struct PartitionConfig
         bool use_reduced_graph;
         LongNodeID reduced_n;
         LongEdgeID reduced_m;
-        LongNodeID pre_reduced_n;
-        LongEdgeID pre_reduced_m;
+        LongNodeID graph_cursor;
         std::vector<LongNodeID>* reduced_mapping; // Maps the original node id to the reduced node id
 
         bool weight_current_cut_edges;

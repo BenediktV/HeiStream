@@ -780,6 +780,7 @@ void graph_io_stream::readFirstLineStream(PartitionConfig &partition_config, std
     if (partition_config.use_reduced_graph) {
         partition_config.remaining_stream_nodes = partition_config.reduced_n;
         partition_config.remaining_stream_edges = partition_config.reduced_m;
+        partition_config.graph_cursor = 0;
     }
 
     partition_config.total_nodes = partition_config.remaining_stream_nodes;

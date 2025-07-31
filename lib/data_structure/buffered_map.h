@@ -97,7 +97,7 @@ class buffered_input {
 			LongNodeID item = 0;
 			while (this->next_int(item)) {
 				if ((*reduce_vec)[item-1] != UNDEFINED_LONGNODE) {
-					vec.push_back((*reduce_vec)[item-1] + 1);
+					vec.push_back((*reduce_vec)[item-1] + 1); // to 0-indexed for lookup, then back to 1-indexed
 				}
 			}
 			this->row++;
