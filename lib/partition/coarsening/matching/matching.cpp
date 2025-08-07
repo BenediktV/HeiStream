@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 #include "matching.h"
-
+namespace heistream {
 matching::matching() {
 
 }
@@ -21,4 +21,4 @@ void matching::print_matching(FILE * out, Matching & edge_matching) {
         }        
 }
 
-
+}

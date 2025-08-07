@@ -18,7 +18,7 @@
 #include "matching/gpa/gpa_matching.h"
 #include "matching/random_matching.h"
 #include "stop_rules/stop_rules.h"
-
+namespace heistream {
 coarsening::coarsening() {
 
 }
@@ -98,4 +98,4 @@ void coarsening::perform_coarsening(const PartitionConfig & partition_config, gr
         delete coarsening_stop_rule;
 }
 
-
+}

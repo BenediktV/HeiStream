@@ -8,7 +8,7 @@
 #include "initial_refinement.h"
 #include "coarsening/coarsening.h"
 #include "uncoarsening/uncoarsening.h"
-
+namespace heistream {
 initial_refinement::initial_refinement() {
                 
 }
@@ -43,3 +43,4 @@ int initial_refinement::optimize( PartitionConfig & config, graph_access & G, Ed
 
         return improvement;
 } 
+}

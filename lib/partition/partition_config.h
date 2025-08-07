@@ -16,7 +16,7 @@
 #include <sparsehash/dense_hash_set>
 #include <unordered_set>
 #include <vector>
-
+namespace heistream {
 typedef struct {
         PartitionID block;
         int gain;
@@ -619,6 +619,6 @@ struct PartitionConfig
         void LogDump(FILE *out) const {
         }
 };
-
+}
 
 #endif /* end of include guard: PARTITION_CONFIG_DI1ES4T0 */

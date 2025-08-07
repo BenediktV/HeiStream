@@ -16,7 +16,7 @@
 #include "matching/random_matching.h"
 #include "clustering/size_constraint_label_propagation.h"
 #include "stop_rules/stop_rules.h"
-
+namespace heistream {
 class coarsening_configurator {
         public:
                 coarsening_configurator( ) {};
@@ -56,5 +56,5 @@ inline void coarsening_configurator::configure_coarsening( const PartitionConfig
                 *edge_matcher = new random_matching();
         }  
 }
-
+}
 #endif /* end of include guard: COARSENING_CONFIGURATOR_8UJ78WYS */

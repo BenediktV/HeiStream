@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_hierarchy.h"
 #include "partition_config.h"
-
+namespace heistream {
 class initial_partitioning {
 public:
         initial_partitioning( );
@@ -18,6 +18,6 @@ public:
         void perform_initial_partitioning(PartitionConfig & config, graph_hierarchy & hierarchy);
         void perform_initial_partitioning(PartitionConfig & config, graph_access &  G);
 };
-
+}
 
 #endif /* end of include guard: INITIAL_PARTITIONING_D7VA0XO9 */

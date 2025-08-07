@@ -7,7 +7,7 @@
 
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
-
+namespace heistream {
 class initial_node_separator {
 public:
         initial_node_separator();
@@ -17,6 +17,6 @@ public:
         void compute_node_separator( const PartitionConfig & config, graph_access & G);
         NodeWeight single_run( const PartitionConfig & config, graph_access & G);
 };
-
+}
 
 #endif /* end of include guard: INITIAL_NODE_SEPARATOR_VR5EPEO6 */

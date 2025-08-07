@@ -8,7 +8,7 @@
 #include "macros_assertions.h"
 #include "random_functions.h"
 #include "random_matching.h"
-
+namespace heistream {
 random_matching::random_matching() {
 
 }
@@ -113,4 +113,5 @@ void random_matching::match(const PartitionConfig & partition_config,
 
         }
         PRINT(std::cout << "log>" << "no of coarse nodes: " << no_of_coarse_vertices << std::endl;)
+}
 }

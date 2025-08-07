@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 #include "refinement.h"
-
+namespace heistream {
 refinement::refinement() {
                 
 }
@@ -14,6 +14,6 @@ refinement::refinement() {
 refinement::~refinement() {
                 
 }
-
+}
 
 

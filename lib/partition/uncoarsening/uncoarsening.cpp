@@ -13,7 +13,7 @@
 #include "refinement/refinement.h"
 #include "tools/random_functions.h"
 #include "uncoarsening.h"
-
+namespace heistream {
 
 uncoarsening::uncoarsening() {
 
@@ -96,4 +96,4 @@ int uncoarsening::perform_uncoarsening_cut(PartitionConfig & config, graph_hiera
         return improvement;
 }
 
-
+}

@@ -7,7 +7,7 @@
 
 #include "complete_boundary.h"
 #include "quality_metrics.h"
-
+namespace heistream {
 complete_boundary::complete_boundary(graph_access * G) {
         m_graph_ref   = G;
         m_pb_lhs_lazy = 0;
@@ -135,4 +135,6 @@ void complete_boundary::balance_singletons_het_bal(const PartitionConfig & confi
                         G.setPartitionIndex(node, p);
                 }
         }
+}
+
 }

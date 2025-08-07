@@ -10,7 +10,7 @@
 
 #include <unordered_map>
 #include "../matching/matching.h"
-
+namespace heistream {
 struct ensemble_pair {
         PartitionID n; // number of nodes in the graph
         PartitionID lhs;
@@ -108,5 +108,5 @@ class size_constraint_label_propagation : public matching {
 
 };
 
-
+}
 #endif /* end of include guard: SIZE_CONSTRAINT_LABEL_PROPAGATION_7SVLBKKT */

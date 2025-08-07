@@ -14,6 +14,7 @@
 #include "data_structure/graph_access.h"
 #include "definitions.h"
 
+namespace heistream {
 class topological_sort {
 public:
         topological_sort();
@@ -27,5 +28,5 @@ public:
                       std::vector<NodeID> & sorted_sequence);
 };
 
-
+}
 #endif /* end of include guard: TOPOLOGICAL_SORT_GB9FC2CZ */

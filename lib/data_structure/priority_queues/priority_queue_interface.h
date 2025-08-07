@@ -9,7 +9,7 @@
 #define PRIORITY_QUEUE_INTERFACE_20ZSYG7R
 
 #include "definitions.h"
-
+namespace heistream {
 class priority_queue_interface {
         public:
                 priority_queue_interface( ) = default;
@@ -35,6 +35,6 @@ class priority_queue_interface {
 };
 
 typedef priority_queue_interface refinement_pq;
-
+}
 #endif /* end of include guard: PRIORITY_QUEUE_INTERFACE_20ZSYG7R */
 

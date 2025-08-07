@@ -15,7 +15,7 @@
 #include <iostream> // cerr
 
 #include "macros_common.h"
-
+namespace heistream {
 // A custom assertion macro that does not kill the program but prints to
 // stderr instead.  
 //#if (defined(NDEBUG) || defined(SPEEDPROFILING))
@@ -176,6 +176,6 @@
         }
 #endif
 
-
+}
 #endif // ifndef ASSERT_H
 

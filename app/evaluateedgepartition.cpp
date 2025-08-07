@@ -24,6 +24,8 @@
 #include "flatbuffers/flatbuffers.h"
 #include "PartitionInfo_generated.h"
 
+using namespace heistream;
+
 #define MIN(A, B) ((A) < (B)) ? (A) : (B)
 #define MAX(A, B) ((A) > (B)) ? (A) : (B)
 

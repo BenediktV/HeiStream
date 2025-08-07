@@ -25,7 +25,7 @@
 #include "data_structure/buffered_map.h"
 #include "timer.h"
 
-
+namespace heistream {
 class graph_io {
         public:
                 graph_io();
@@ -105,5 +105,5 @@ void graph_io::readVector(std::vector<vectortype> & vec, const std::string & fil
 
         in.close();
 }
-
+}
 #endif /*GRAPHIO_H_*/

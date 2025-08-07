@@ -10,7 +10,7 @@
 
 #include "definitions.h"
 #include "refinement.h"
-
+namespace heistream {
 class mixed_refinement : public refinement {
 public:
         mixed_refinement( );
@@ -20,6 +20,6 @@ public:
                                               graph_access & G, 
                                               complete_boundary & boundary); 
 };
-
+}
 
 #endif /* end of include guard: MIXED_REFINEMENT_XJC6COP3 */

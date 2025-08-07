@@ -15,7 +15,7 @@
 #include "partition_config.h"
 #include "data_structure/graph_access.h"
 #include "tools/random_functions.h"
-
+namespace heistream {
 class node_ordering {
 public:
         node_ordering();
@@ -54,6 +54,6 @@ public:
         }
 
  };
-
+}
 
 #endif /* end of include guard: NODE_ORDERING_HM1YMLB1 */

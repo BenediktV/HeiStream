@@ -33,8 +33,9 @@
 #define MIN(A, B) ((A)<(B))?(A):(B)
 #define MAX(A, B) ((A)>(B))?(A):(B)
 
+//using namespace heistream;
 
-void config_multibfs_initial_partitioning(PartitionConfig &partition_config);
+void config_multibfs_initial_partitioning(heistream::PartitionConfig &partition_config);
 
 long getMaxRSS();
 
@@ -56,17 +57,17 @@ int main(int argn, char **argv) {
 ██  ██ ██ ██    ██ ██   ██ ██
 ██   ████  ██████  ██████  ███████
     )" << std::endl;
-    PartitionConfig partition_config;
+    heistream::PartitionConfig partition_config;
     std::string graph_filename;
-    timer t, processing_t, io_t, model_t;
-    EdgeWeight total_edge_cut = 0;
+    heistream::timer t, processing_t, io_t, model_t;
+    heistream::EdgeWeight total_edge_cut = 0;
     double global_mapping_time = 0;
     double buffer_mapping_time = 0;
     double buffer_io_time = 0;
     double model_construction_time = 0;
-    quality_metrics qm;
-    balance_configuration bc;
-    std::vector <std::vector<LongNodeID>> *input = NULL;
+    heistream::quality_metrics qm;
+    heistream::balance_configuration bc;
+    std::vector <std::vector<heistream::LongNodeID>> *input = NULL;
 
     bool is_graph_weighted = false;
     bool suppress_output = false;
@@ -88,12 +89,12 @@ int main(int argn, char **argv) {
         std::cout.rdbuf(ofs.rdbuf());
     }
     srand(partition_config.seed);
-    random_functions::setSeed(partition_config.seed);
+    heistream::random_functions::setSeed(partition_config.seed);
 
     partition_config.LogDump(stdout);
     partition_config.graph_filename = graph_filename;
     partition_config.stream_input = true;
-    graph_access *G = new graph_access();
+    heistream::graph_access *G = new heistream::graph_access();
 
 
     int &passes = partition_config.num_streams_passes;
@@ -102,8 +103,8 @@ int main(int argn, char **argv) {
 
         // ***************************** IO operations ***************************************
         io_t.restart();
-        graph_io_stream::readFirstLineStream(partition_config, graph_filename, total_edge_cut);
-        graph_io_stream::loadRemainingLinesToBinary(partition_config, input);
+        heistream::graph_io_stream::readFirstLineStream(partition_config, graph_filename, total_edge_cut);
+        heistream::graph_io_stream::loadRemainingLinesToBinary(partition_config, input);
         buffer_io_time += io_t.elapsed();
 
         while (partition_config.remaining_stream_nodes) {
@@ -111,7 +112,7 @@ int main(int argn, char **argv) {
             io_t.restart();
             partition_config.nmbNodes = MIN(partition_config.stream_buffer_len,
                                             partition_config.remaining_stream_nodes);
-            graph_io_stream::loadBufferLinesToBinary(partition_config, input, partition_config.nmbNodes);
+            heistream::graph_io_stream::loadBufferLinesToBinary(partition_config, input, partition_config.nmbNodes);
             buffer_io_time += io_t.elapsed();
 
             t.restart();
@@ -119,11 +120,11 @@ int main(int argn, char **argv) {
             // ***************************** build model ***************************************
             G->set_partition_count(partition_config.k);
             model_t.restart();
-            graph_io_stream::createModel(partition_config, *G, input);
+            heistream::graph_io_stream::createModel(partition_config, *G, input, false);
             model_construction_time += model_t.elapsed();
             buffer_mapping_time = 0;
-            graph_io_stream::countAssignedNodes(partition_config);
-            graph_io_stream::prescribeBufferInbalance(partition_config);
+            heistream::graph_io_stream::countAssignedNodes(partition_config);
+            heistream::graph_io_stream::prescribeBufferInbalance(partition_config);
             bool already_fully_partitioned = (partition_config.restream_vcycle && partition_config.restream_number);
             bc.configurate_balance(partition_config, *G,
                                    already_fully_partitioned || !partition_config.stream_initial_bisections);
@@ -131,12 +132,12 @@ int main(int argn, char **argv) {
 
 
             // ***************************** perform partitioning ***************************************
-            graph_partitioner partitioner;
+            heistream::graph_partitioner partitioner;
             partitioner.perform_partitioning(partition_config, *G);
             ofs.close();
 
             // ***************************** permanent assignment ***************************************
-            graph_io_stream::generalizeStreamPartition(partition_config, *G);
+            heistream::graph_io_stream::generalizeStreamPartition(partition_config, *G);
 
             global_mapping_time += t.elapsed();
 
@@ -152,7 +153,7 @@ int main(int argn, char **argv) {
                 if (partition_config.restream_number) {
                     filename << ".R" << partition_config.restream_number;
                 }
-                graph_io_stream::writePartitionStream(partition_config);
+                heistream::graph_io_stream::writePartitionStream(partition_config);
             }
 
         }
@@ -166,9 +167,9 @@ int main(int argn, char **argv) {
     double total_time = processing_t.elapsed();
     delete G;
     long maxRSS = getMaxRSS();
-    FlatBufferWriter fb_writer;
+    heistream::FlatBufferWriter fb_writer;
 
-    graph_io_stream::streamEvaluatePartition(partition_config, graph_filename, total_edge_cut);
+    heistream::graph_io_stream::streamEvaluatePartition(partition_config, graph_filename, total_edge_cut, false);
     fb_writer.updateVertexPartitionResults(total_edge_cut, qm.balance_full_stream(*partition_config.stream_blocks_weight));
 
     // write the partition to the disc
@@ -180,7 +181,7 @@ int main(int argn, char **argv) {
     }
 
     if (!partition_config.suppress_output) {
-        graph_io_stream::writePartitionStream(partition_config);
+        heistream::graph_io_stream::writePartitionStream(partition_config);
     } else {
         std::cout << "No partition will be written as output." << std::endl;
     }
@@ -196,9 +197,9 @@ int main(int argn, char **argv) {
 }
 
 
-void config_multibfs_initial_partitioning(PartitionConfig &partition_config) {
+void config_multibfs_initial_partitioning(heistream::PartitionConfig &partition_config) {
     if (partition_config.initial_part_multi_bfs && partition_config.curr_batch >= 2) {
-        partition_config.initial_partitioning_type = INITIAL_PARTITIONING_MULTIBFS;
+        partition_config.initial_partitioning_type = heistream::INITIAL_PARTITIONING_MULTIBFS;
     }
 }
 

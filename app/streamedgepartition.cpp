@@ -31,6 +31,8 @@
 #define MIN(A, B) ((A) < (B)) ? (A) : (B)
 #define MAX(A, B) ((A) > (B)) ? (A) : (B)
 
+using namespace heistream;
+
 void config_multibfs_initial_partitioning(PartitionConfig &partition_config);
 
 long getMaxRSS();

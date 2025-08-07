@@ -10,7 +10,7 @@
 #include "definitions.h"
 #include "graph_io.h"
 #include "partition_snapshooter.h"
-
+namespace heistream {
 partition_snapshooter* partition_snapshooter::m_instance = NULL;
 
 partition_snapshooter::partition_snapshooter() {
@@ -79,4 +79,4 @@ void partition_snapshooter::flush_buffer() {
 void partition_snapshooter::set_buffer_size( unsigned int new_buffer_size ) {
         m_buffer_size = new_buffer_size;
 }
-
+}

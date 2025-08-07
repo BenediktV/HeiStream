@@ -10,7 +10,7 @@
 
 #include <unordered_map>
 #include "definitions.h"
-
+namespace heistream {
 struct compare_nodes_contains {
         bool operator()(const NodeID lhs, const NodeID rhs) const {
                 return (lhs == rhs);
@@ -72,5 +72,7 @@ inline void PartialBoundary::clear() {
 
 //iterator for
 #define forall_boundary_nodes(boundary, n) { is_boundary_node_hashtable::iterator iter; NodeID n; for(iter = boundary.internal_boundary.begin(); iter != boundary.internal_boundary.end(); iter++ ) { n = iter->first;
+
+}
 
 #endif /* end of include guard: PARTIAL_BOUNDARY_963CRO9F */

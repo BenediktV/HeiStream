@@ -11,6 +11,8 @@
 
 #include "partition/partition_config.h"
 
+namespace heistream {
+
 class configuration {
         public:
                 configuration() {} ;
@@ -754,6 +756,8 @@ inline void configuration::stream_partition( PartitionConfig & partition_config 
                 partition_config.adapt_bal				= true;
 		partition_config.xxx					= 4;
                 partition_config.restream_vcycle			= true;
+}
+
 }
 
 #endif /* end of include guard: CONFIGURATION_3APG5V7Z */

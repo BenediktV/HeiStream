@@ -9,7 +9,7 @@
 #define RANDOM_MATCHING_D5YDSMDW
 
 #include "matching.h"
-
+namespace heistream {
 class random_matching : public matching {
         public:
                 random_matching();
@@ -22,5 +22,5 @@ class random_matching : public matching {
                            NodeID & no_of_coarse_vertices,
                            NodePermutationMap & permutation);
 };
-
+}
 #endif /* end of include guard: RANDOM_MATCHING_D5YDSMDW */

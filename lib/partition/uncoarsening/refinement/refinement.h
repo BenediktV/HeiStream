@@ -11,7 +11,7 @@
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
 #include "quotient_graph_refinement/complete_boundary.h"
-
+namespace heistream {
 class refinement {
 public:
         refinement( );
@@ -22,6 +22,6 @@ public:
                                               complete_boundary & boundary) = 0;
         
 };
-
+}
 
 #endif /* end of include guard: REFINEMENT_UJN9IBHM */

@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 #include "partial_boundary.h"
-
+namespace heistream {
 PartialBoundary::PartialBoundary() {
                 
 }
@@ -14,4 +14,4 @@ PartialBoundary::PartialBoundary() {
 PartialBoundary::~PartialBoundary() {
                 
 }
-
+}

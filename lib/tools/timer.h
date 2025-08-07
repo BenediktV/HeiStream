@@ -11,7 +11,7 @@
 #include <sys/time.h>
 #include <sys/resource.h> 
 #include <unistd.h> 
-
+namespace heistream {
 class timer {
         public:
                 timer() {
@@ -37,5 +37,5 @@ class timer {
 
                 double m_start;
 }; 
-
+}
 #endif /* end of include guard: TIMER_9KPDEP */

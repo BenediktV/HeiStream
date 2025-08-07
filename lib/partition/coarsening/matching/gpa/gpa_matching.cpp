@@ -12,7 +12,7 @@
 #include "gpa_matching.h"
 #include "macros_assertions.h"
 #include "random_functions.h"
-
+namespace heistream {
 gpa_matching::gpa_matching() {
 
 }
@@ -354,5 +354,7 @@ void gpa_matching::dump_unpacked_path( graph_access & G,
         }
         std::cout << std::endl;
 
+
+}
 
 }

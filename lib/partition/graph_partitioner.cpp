@@ -15,7 +15,7 @@
 #include "uncoarsening/refinement/mixed_refinement.h"
 #include <cmath>
 #include <iostream>
-
+namespace heistream {
 graph_partitioner::graph_partitioner() {
 
 }
@@ -283,4 +283,4 @@ void graph_partitioner::perform_partitioning( PartitionConfig & config, graph_ac
 
         }
 }
-
+}

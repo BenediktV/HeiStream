@@ -9,7 +9,7 @@
 #define PATH_X5LQS3DT
 
 #include "definitions.h"
-
+namespace heistream {
 class path {
         public:
                 path( );
@@ -98,5 +98,5 @@ inline void path::set_active(const bool act) {
         active = act;        
 }
 
-
+}
 #endif /* end of include guard: PATH_X5LQS3DT */

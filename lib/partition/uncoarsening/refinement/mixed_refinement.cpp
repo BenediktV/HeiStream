@@ -7,7 +7,7 @@
 
 #include "mixed_refinement.h"
 #include "label_propagation_refinement/label_propagation_refinement.h"
-
+namespace heistream {
 mixed_refinement::mixed_refinement() {
 
 }
@@ -34,4 +34,4 @@ EdgeWeight mixed_refinement::perform_refinement(PartitionConfig & config, graph_
 
         return overall_improvement;
 }
-
+}

@@ -11,6 +11,7 @@
 #include "partition_config.h"       
 #include "random_functions.h"
 
+namespace heistream {
 edge_ratings::edge_ratings(const PartitionConfig & _partition_config) : partition_config(_partition_config){
 
 }
@@ -381,3 +382,4 @@ void edge_ratings::rate_separator_r8(graph_access & G) {
         } endfor
 }
 
+}

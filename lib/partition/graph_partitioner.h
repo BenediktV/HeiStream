@@ -13,7 +13,7 @@
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
 #include "uncoarsening/refinement/refinement.h"
-
+namespace heistream {
 class graph_partitioner {
 public:
         graph_partitioner();
@@ -34,5 +34,5 @@ private:
 	int m_global_upper_bound;
         int m_rnd_bal;
 };
-
+}
 #endif /* end of include guard: PARTITION_OL9XTLU4 */

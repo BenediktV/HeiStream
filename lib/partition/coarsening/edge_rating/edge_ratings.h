@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_access.h"
 #include "partition_config.h"       
-
+namespace heistream {
 class edge_ratings {
 public:
         edge_ratings(const PartitionConfig & partition_config);
@@ -40,6 +40,6 @@ public:
 private:
         const PartitionConfig & partition_config;
 };
-
+}
 
 #endif /* end of include guard: EDGE_RATING_FUNCTIONS_FUCW7H6Y */

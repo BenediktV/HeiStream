@@ -13,6 +13,7 @@
 
 #include "data_structure/graph_access.h"
 #include "definitions.h"
+namespace heistream {
 
 class strongly_connected_components {
 public:
@@ -32,6 +33,6 @@ private:
         std::stack<NodeID> m_roots;
         std::stack< std::pair<NodeID,EdgeID> > iteration_stack;
 };
-
+}
 
 #endif /* end of include guard: STRONGLY_CONNECTED_COMPONENTS_7ZJ8233R */

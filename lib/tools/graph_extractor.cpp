@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include "graph_extractor.h"
 
-
+namespace heistream {
 graph_extractor::graph_extractor() {
 
 }
@@ -194,5 +194,5 @@ void graph_extractor::extract_two_blocks_connected(graph_access & G,
 
         pair.finish_construction();
 }
-
+}
 

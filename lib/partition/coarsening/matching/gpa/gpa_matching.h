@@ -11,7 +11,7 @@
 #include "coarsening/matching/matching.h"
 #include "path.h"
 #include "path_set.h"
-
+namespace heistream {
 class gpa_matching : public matching{
         public:
                 gpa_matching( );
@@ -59,5 +59,5 @@ class gpa_matching : public matching{
                                                  std::vector<NodeID>& sources);
 };
 
-
+}
 #endif /* end of include guard: GPA_MATCHING_NXLQ0SIT */

@@ -11,7 +11,7 @@
 
 #define MIN(A,B) ((A)<(B))?(A):(B)
 
-
+namespace heistream {
 graph_io::graph_io() {
 
 }
@@ -433,4 +433,4 @@ void graph_io::writeSpMxVPartition(PartitionConfig & config, graph_access & G, c
 
 }
 
-
+}

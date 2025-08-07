@@ -7,7 +7,7 @@
 
 #ifndef MACROS_COMMON_H 
 #define MACROS_COMMON_H
-
+namespace heistream {
 // If DEBUG has not been defined yet then define it as false.
 #ifndef DEBUG
 # define DEBUG 0
@@ -40,6 +40,6 @@
 // This macro allows to convert an expression to a string.
 #define STR(x) ASSERT_H_XSTR(x)
 
-
+}
 #endif // ifndef MACROS_COMMON_H
 

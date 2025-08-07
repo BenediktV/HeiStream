@@ -34,6 +34,8 @@
 #include <sparsehash/dense_hash_map>
 #include <sparsehash/dense_hash_set>
 
+namespace heistream {
+
 typedef std::vector <std::string> *LINE_BUFFER;
 
 class graph_io_stream {
@@ -350,5 +352,5 @@ graph_io_stream::loadLinesFromStreamToBinary(PartitionConfig &partition_config, 
     return input;
 }
 
-
+}
 #endif /*GRAPHIOSTREAM_H_*/

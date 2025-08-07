@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 #include "path_set.h"
-
+namespace heistream {
 path_set::path_set( graph_access * G_, const PartitionConfig * config_ ): pG(G_), config(config_),
                                          m_no_of_paths(pG->number_of_nodes()), 
                                          m_vertex_to_path(m_no_of_paths),
@@ -29,4 +29,4 @@ path_set::path_set( graph_access * G_, const PartitionConfig * config_ ): pG(G_)
 path_set::~path_set() {
                 
 }
-
+}

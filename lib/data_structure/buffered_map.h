@@ -17,7 +17,7 @@
 
 
 
-
+namespace heistream {
 
 //////// Vector Version
 class buffered_map {
@@ -126,7 +126,7 @@ class buffered_input {
 		LongNodeID row, column, n_buffer_lines;
 };
 
-
+}
 
 #endif /* end of include guard: BUFFERED_MAP_EFRXO4X2 */
 //macros  

@@ -14,6 +14,8 @@
 #include "uncoarsening/refinement/quotient_graph_refinement/partial_boundary.h"
 #include "partition/partition_config.h"
 
+namespace heistream {
+
 class graph_hierarchy {
 public:
         graph_hierarchy( );
@@ -41,5 +43,5 @@ private:
         CoarseMapping * m_current_coarse_mapping;
 };
 
-
+}
 #endif /* end of include guard: GRAPH_HIERACHY_UMHG74CO */

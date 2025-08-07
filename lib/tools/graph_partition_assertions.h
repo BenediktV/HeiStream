@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
-
+namespace heistream {
 class graph_partition_assertions {
         public:
                 graph_partition_assertions( ) {};
@@ -36,5 +36,5 @@ class graph_partition_assertions {
 
 };
 
-
+}
 #endif /* end of include guard: GRAPH_PARTITION_ASSERTIONS_609QZZDM */
