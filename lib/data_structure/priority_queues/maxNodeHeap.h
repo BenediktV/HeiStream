@@ -15,6 +15,8 @@
 
 #include "data_structure/priority_queues/priority_queue_interface.h"
 
+namespace heistream {
+
 typedef int Key;
 
 template < typename Data >
@@ -295,5 +297,5 @@ inline Gain maxNodeHeap::getKey(NodeID node) {
 inline bool maxNodeHeap::contains(NodeID node) {
        return m_element_index.find(node) != m_element_index.end();
 }
-
+}
 #endif

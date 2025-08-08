@@ -12,7 +12,7 @@
 #include "data_structure/graph_access.h"
 #include "matching/matching.h"
 #include "partition_config.h"
-
+namespace heistream {
 typedef NodeID Regions;
 
 class contraction {
@@ -81,6 +81,6 @@ inline void contraction::visit_edge(graph_access & G,
         }
 }
 
-
+}
 
 #endif /* end of include guard: CONTRACTION_VIXZ9K0F */

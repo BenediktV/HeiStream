@@ -9,7 +9,7 @@
 #define PARTITION_SNAPSHOOTER_LGCUMS2I
 
 #include "data_structure/graph_access.h"
-
+namespace heistream {
 //buffered partition snapshooter (singleton)
 class partition_snapshooter {
         public: 
@@ -34,5 +34,5 @@ class partition_snapshooter {
                 std::vector< std::vector< PartitionID >* > m_partition_map_buffer;
 };
 
-
+}
 #endif /* end of include guard: PARTITION_SNAPSHOOTER_LGCUMS2I */

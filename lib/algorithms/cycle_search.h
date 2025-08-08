@@ -10,6 +10,7 @@
 
 #include "data_structure/graph_access.h"
 
+namespace heistream {
 class cycle_search {
 public:
         cycle_search();
@@ -40,5 +41,5 @@ private:
                                                               std::vector<NodeID> & cycle);
 };
 
-
+}
 #endif /* end of include guard: CYCLE_SEARCH_IO23844C */

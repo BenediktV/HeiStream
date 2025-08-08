@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_access.h"
 #include "definitions.h"
-
+namespace heistream {
 class graph_extractor {
         public:
                 graph_extractor();
@@ -40,6 +40,6 @@ class graph_extractor {
 
 
 };
-
+}
 
 #endif /* end of include guard: GRAPH_EXTRACTOR_PDUTVIEF */

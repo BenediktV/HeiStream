@@ -9,6 +9,8 @@
 #include<map>
 #include<vector>
 
+namespace heistream {
+
 graph_hierarchy::graph_hierarchy() : m_current_coarser_graph(NULL), 
                                      m_current_coarse_mapping(NULL){
 
@@ -124,4 +126,6 @@ bool graph_hierarchy::isEmpty( ) {
 
 unsigned int graph_hierarchy::size() {
         return m_the_graph_hierarchy.size();        
+}
+
 }

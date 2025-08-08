@@ -13,6 +13,8 @@
 #include <sstream>
 #include "configuration.h"
 
+namespace heistream {
+
 int parse_parameters(int argn, char **argv, 
                      PartitionConfig & partition_config, 
                      std::string & graph_filename, 
@@ -1695,6 +1697,8 @@ int parse_parameters(int argn, char **argv,
         }
 
         return 0;
+}
+
 }
 
 #endif /* end of include guard: PARSE_PARAMETERS_GPJMGSM8 */

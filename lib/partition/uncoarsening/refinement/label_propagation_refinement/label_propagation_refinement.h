@@ -11,7 +11,7 @@
 
 #include "definitions.h"
 #include "../refinement.h"
-
+namespace heistream {
 class label_propagation_refinement : public refinement {
 public:
         label_propagation_refinement();
@@ -26,6 +26,6 @@ public:
 
         bool is_boundary(NodeID node, graph_access & G);
 };
-
+}
 
 #endif /* end of include guard: LABEL_PROPAGATION_REFINEMENT_R4XW141Y */

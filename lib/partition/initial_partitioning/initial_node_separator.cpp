@@ -9,7 +9,7 @@
 #include "tools/random_functions.h"
 #include "partition/uncoarsening/separator/vertex_separator_algorithm.h"
 #include "partition/uncoarsening/refinement/node_separators/fm_ns_local_search.h"
-
+namespace heistream {
 initial_node_separator::initial_node_separator() {
                 
 }
@@ -88,4 +88,5 @@ void initial_node_separator::compute_node_separator( const PartitionConfig & con
                 G.setPartitionIndex(node, best_separator[node]);
         } endfor
         
+}
 }

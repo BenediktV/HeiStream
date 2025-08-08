@@ -16,7 +16,7 @@
 #include "data_structure/graph_access.h"
 #include "partial_boundary.h"
 #include "partition_config.h"
-
+namespace heistream {
 struct block_informations {
         NodeWeight block_weight;
         NodeID block_no_nodes;
@@ -670,5 +670,5 @@ inline bool complete_boundary::assert_boundaries_are_bnodes() {
         return true;
 }
 #endif // #ifndef NDEBUG
-
+}
 #endif /* end of include guard: COMPLETE_BOUNDARY_URZZFDEI */

@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 #include "path.h"
-
+namespace heistream {
 path::path() : head(UNDEFINED_NODE), tail(UNDEFINED_NODE), length(0), active(false) {
                 
 }
@@ -19,3 +19,4 @@ path::~path() {
                 
 }
 
+}

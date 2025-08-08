@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 #include "initial_partitioner.h"
-
+namespace heistream {
 initial_partitioner::initial_partitioner() {
                 
 }
@@ -14,4 +14,4 @@ initial_partitioner::initial_partitioner() {
 initial_partitioner::~initial_partitioner() {
                 
 }
-
+}

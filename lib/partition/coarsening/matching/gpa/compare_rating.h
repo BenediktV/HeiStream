@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_access.h"
 #include "definitions.h"
-
+namespace heistream {
 class compare_rating : public std::binary_function<EdgeRatingType, EdgeRatingType, bool> {
         public:
                 compare_rating(graph_access * pG) : G(pG) {};
@@ -24,5 +24,5 @@ class compare_rating : public std::binary_function<EdgeRatingType, EdgeRatingTyp
                 graph_access * G;
 };
 
-
+}
 #endif /* end of include guard: COMPARE_RATING_750FUZ7Z */

@@ -11,7 +11,7 @@
 #include "data_structure/graph_access.h"
 #include "data_structure/graph_hierarchy.h"
 #include "partition_config.h"
-
+namespace heistream {
 class coarsening {
 public:
         coarsening ();
@@ -19,5 +19,5 @@ public:
 
         void perform_coarsening(const PartitionConfig & config, graph_access & G, graph_hierarchy & hierarchy);
 };
-
+}
 #endif /* end of include guard: COARSENING_UU97ZBTR */

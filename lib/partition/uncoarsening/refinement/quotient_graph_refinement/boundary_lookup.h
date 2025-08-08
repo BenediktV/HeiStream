@@ -13,7 +13,7 @@
 #include "definitions.h"
 #include "limits.h"
 #include "partial_boundary.h"
-
+namespace heistream {
 struct boundary_pair {
         PartitionID k;
         PartitionID lhs;
@@ -71,6 +71,6 @@ struct hash_boundary_pair{
 typedef std::unordered_map<const boundary_pair, data_boundary_pair, hash_boundary_pair, compare_boundary_pair> block_pairs;
 
 
-
+}
 #endif /* end of include guard: BOUNDARY_LOOKUP_2JMSKBSI */
 

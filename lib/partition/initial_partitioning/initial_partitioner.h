@@ -10,7 +10,7 @@
 
 #include "partition_config.h"
 #include "data_structure/graph_access.h"
-
+namespace heistream {
 class initial_partitioner {
         public:
                 initial_partitioner( );
@@ -32,5 +32,5 @@ class initial_partitioner {
                                                int ismultisec=0) = 0;
 };
 
-
+}
 #endif /* end of include guard: INITIAL_PARTITIONER_TJKC6RWY */

@@ -13,7 +13,7 @@
 
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
-
+namespace heistream {
 class quality_metrics {
 public:
         quality_metrics();
@@ -42,5 +42,5 @@ public:
 	EdgeWeight edge_cut_full_stream(const PartitionConfig & config, graph_access & G, std::vector<std::vector<EdgeWeight>> & edges_virtualReal);
 	double balance_full_stream(std::vector<NodeWeight> &stream_blocks_weight);
 };
-
+}
 #endif /* end of include guard: QUALITY_METRICS_10HC2I5M */

@@ -16,7 +16,7 @@
 #include <vector>
 #include <list>
 #include <numeric>
-
+namespace heistream {
 quality_metrics::quality_metrics() {
 }
 
@@ -493,4 +493,4 @@ EdgeWeight quality_metrics::objective(const PartitionConfig & config, graph_acce
                 return edge_cut(G, partition_map);
         }
 }
-
+}

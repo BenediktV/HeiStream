@@ -7,7 +7,7 @@
 
 
 #include "node_ordering.h"
-
+namespace heistream {
 node_ordering::node_ordering() {
                 
 }
@@ -15,4 +15,4 @@ node_ordering::node_ordering() {
 node_ordering::~node_ordering() {
                 
 }
-
+}

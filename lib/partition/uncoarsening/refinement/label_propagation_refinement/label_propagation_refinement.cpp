@@ -12,7 +12,7 @@
 #include <map>
 #include <set>
 
-
+namespace heistream {
 
 label_propagation_refinement::label_propagation_refinement() {
                 
@@ -191,3 +191,4 @@ bool label_propagation_refinement::is_boundary(NodeID node, graph_access & G) {
         } endfor
         return false;
 }  
+}

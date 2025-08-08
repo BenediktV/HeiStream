@@ -10,6 +10,7 @@
 
 #include <vector>
 
+namespace heistream {
 // A simple Union-Find datastructure implementation.
 // This is sometimes also caled "disjoint sets datastructure.
 class union_find 
@@ -59,7 +60,7 @@ class union_find
                 unsigned m_n;
 };
 
-
+}
 
 #endif // ifndef UNION_FIND_H
 

@@ -15,7 +15,7 @@
 #include "quality_metrics.h"
 #include "random_functions.h"
 #include "timer.h"
-
+namespace heistream {
 initial_partitioning::initial_partitioning() {
 
 }
@@ -129,3 +129,4 @@ void initial_partitioning::perform_initial_partitioning(PartitionConfig & config
         delete partition;
 }
 
+}

@@ -7,7 +7,7 @@
 
 #include "misc.h"
 #include "quality_metrics.h"
-
+namespace heistream {
 misc::misc() {
 
 }
@@ -46,4 +46,5 @@ void misc::balance_singletons(const PartitionConfig & config, graph_access & G) 
                 G.setPartitionIndex(node, p);
         }
         std::cout <<  "log> balance after assigning singletons " <<  qm.balance(G)  << std::endl;
+}
 }

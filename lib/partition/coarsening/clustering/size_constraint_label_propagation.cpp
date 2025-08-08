@@ -18,7 +18,7 @@
 #include "io/graph_io.h"
 
 #include "size_constraint_label_propagation.h"
-
+namespace heistream {
 size_constraint_label_propagation::size_constraint_label_propagation() {
                 
 }
@@ -284,4 +284,4 @@ void size_constraint_label_propagation::cluster_isolated_nodes(const PartitionCo
 		}
 	}
 }
-
+}

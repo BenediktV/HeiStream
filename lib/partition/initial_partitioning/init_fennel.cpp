@@ -8,7 +8,7 @@
 #include "init_fennel.h"
 #include "data_structure/priority_queues/maxNodeHeap.h"
 
-
+namespace heistream {
 init_fennel::init_fennel() {
 
 }
@@ -240,3 +240,4 @@ EdgeWeight init_fennel::fennel(PartitionConfig &partition_config, graph_access &
     return 0;
 }
 
+}

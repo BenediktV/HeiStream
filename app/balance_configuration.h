@@ -12,6 +12,8 @@
 #include "partition/partition_config.h"
 #include <cmath>
 
+namespace heistream {
+
 class balance_configuration {
 public:
         balance_configuration() {};
@@ -70,5 +72,5 @@ public:
 
 };
 
-
+}
 #endif /* end of include guard: BALANCE_CONFIGURATION_JCQB9ZGV */

@@ -15,6 +15,7 @@
 
 #include "definitions.h"
 
+namespace heistream {
 struct Node {
     EdgeID firstEdge;
     NodeWeight weight;
@@ -618,6 +619,8 @@ inline void graph_access::copy(graph_access & G_bar) {
         } endfor
 
         G_bar.finish_construction();
+}
+
 }
 
 #endif /* end of include guard: GRAPH_ACCESS_EFRXO4X2 */

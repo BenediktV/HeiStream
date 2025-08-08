@@ -10,6 +10,8 @@
 
 #include "strongly_connected_components.h"
 
+namespace heistream {
+
 strongly_connected_components::strongly_connected_components() {
 
 }
@@ -92,4 +94,4 @@ void strongly_connected_components::explicit_scc_dfs(NodeID node, graph_access &
 
 }
 
-
+}

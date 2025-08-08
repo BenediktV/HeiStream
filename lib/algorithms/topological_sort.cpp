@@ -10,6 +10,8 @@
 #include "random_functions.h"
 #include "topological_sort.h"
 
+namespace heistream {
+
 topological_sort::topological_sort() {
                 
 }
@@ -52,4 +54,6 @@ void topological_sort::sort_dfs(NodeID node, graph_access & G,
        
         //return from call of node node
         sorted_sequence.push_back(node);
+}
+
 }

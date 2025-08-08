@@ -13,6 +13,8 @@
 #include <sstream>
 #include "configuration.h"
 
+namespace heistream {
+
 struct SpacConfig {
     EdgeWeight infinity;
 };
@@ -105,6 +107,8 @@ int parse_spac_parameters(int argn, char **argv, PartitionConfig &partition_conf
     }
 
     return 0;
+}
+
 }
 
 #endif // KAHIP_PARSE_SPAC_PARAMETERS_H

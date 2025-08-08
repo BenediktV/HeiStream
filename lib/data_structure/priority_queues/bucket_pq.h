@@ -13,7 +13,7 @@
 #include <utility>
 
 #include "priority_queue_interface.h"
-
+namespace heistream {
 class bucket_pq : public priority_queue_interface {
         public:
                 bucket_pq( const EdgeWeight & gain_span );
@@ -153,5 +153,5 @@ inline bool bucket_pq::contains(NodeID node) {
         return m_queue_index.find(node) != m_queue_index.end();
 }
 
-
+}
 #endif /* end of include guard: BUCKET_PQ_EM8YJPA9 */

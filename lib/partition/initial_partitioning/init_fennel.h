@@ -15,7 +15,7 @@
 #include "uncoarsening/refinement/refinement.h"
 #include "definitions.h"
 #include <algorithm>
-
+namespace heistream {
 class init_fennel : public initial_partitioner {
         public:
                 init_fennel();
@@ -37,6 +37,6 @@ class init_fennel : public initial_partitioner {
 		EdgeWeight fennel(PartitionConfig & partition_config, graph_access & G);
 
 };
-
+}
 
 #endif /* end of include guard: BIPARTITION_7I4IR31Y */

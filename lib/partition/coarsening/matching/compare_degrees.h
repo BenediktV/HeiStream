@@ -7,7 +7,7 @@
 
 #ifndef COMPARE_DEGREES_750FUZ7Z
 #define COMPARE_DEGREES_750FUZ7Z
-
+namespace heistream {
 class compare_degrees : public std::binary_function<EdgeWeight, EdgeWeight, bool> {
         public:
                 compare_degrees(std::vector<EdgeWeight> * degrees) : m_node_degrees(degrees) {};
@@ -21,5 +21,5 @@ class compare_degrees : public std::binary_function<EdgeWeight, EdgeWeight, bool
                 std::vector<EdgeWeight> * m_node_degrees;
 };
 
-
+}
 #endif /* end of include guard: COMPARE_DEGREES_750FUZ7Z */

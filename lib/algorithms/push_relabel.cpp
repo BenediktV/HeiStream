@@ -7,6 +7,8 @@
 
 #include "push_relabel.h"
 
+namespace heistream {
+
 push_relabel::push_relabel( ) {
                 
 }
@@ -15,3 +17,4 @@ push_relabel::~push_relabel() {
                 
 }
 
+}

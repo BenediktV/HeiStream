@@ -8,7 +8,7 @@
 #include "contraction.h"
 #include "../uncoarsening/refinement/quotient_graph_refinement/complete_boundary.h"
 #include "macros_assertions.h"
-
+namespace heistream {
 contraction::contraction() {
 
 }
@@ -208,6 +208,6 @@ void contraction::contract_partitioned(const PartitionConfig & partition_config,
         //this also resizes the edge fields ... 
         coarser.finish_construction();
 }
-
+}
 
 

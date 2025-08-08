@@ -14,6 +14,7 @@
 #include "data_structure/flow_graph.h"
 #include "tools/timer.h"
 
+namespace heistream {
 const int    WORK_OP_RELABEL    = 9;
 const double GLOBAL_UPDATE_FRQ  = 0.51;
 const int    WORK_NODE_TO_EDGES = 4;
@@ -238,5 +239,5 @@ private:
         flow_graph * m_G;
 };
 
-
+}
 #endif /* end of include guard: MAX_FLOW_MIN_CUT_Q5EJKHNS */

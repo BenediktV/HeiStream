@@ -17,7 +17,7 @@
 #define MIN(A, B) ((A)<(B))?(A):(B)
 #define MAX(A, B) ((A)>(B))?(A):(B)
 
-
+namespace heistream {
 graph_io_stream::graph_io_stream() {
 
 }
@@ -2449,4 +2449,6 @@ void graph_io_stream::writeStreamOutput(PartitionConfig &config, graph_access &G
         (*config.stream_out) << block << "\n";
     }
     config.stream_output_time += sot.elapsed();
+}
+
 }

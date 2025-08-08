@@ -12,6 +12,8 @@
 #include "random_functions.h"
 #include "timer.h"
 
+namespace heistream {
+
 double cycle_search::total_time = 0;
 
 cycle_search::cycle_search() {
@@ -434,5 +436,7 @@ bool cycle_search::find_zero_weight_cycle(graph_access & G, NodeID & start, std:
                return true;
         }
         return false;
+
+}
 
 }

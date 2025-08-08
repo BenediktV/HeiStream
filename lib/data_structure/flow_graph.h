@@ -10,6 +10,8 @@
 
 #include "definitions.h"
 
+namespace heistream {
+
 struct rEdge {
     NodeID     source;
     NodeID     target;
@@ -118,6 +120,8 @@ EdgeID flow_graph::getReverseEdge(NodeID source, EdgeID e) {
 #else
         return m_adjacency_lists.at(source).at(e).reverse_edge_index;        
 #endif
+
+}
 
 }
 

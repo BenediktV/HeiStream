@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_hierarchy.h"
 #include "partition_config.h"
-
+namespace heistream {
 class uncoarsening {
 public:
         uncoarsening( );
@@ -19,6 +19,6 @@ public:
         int perform_uncoarsening( PartitionConfig & config, graph_hierarchy & hierarchy);
         int perform_uncoarsening_cut( PartitionConfig & config, graph_hierarchy & hierarchy);
 };
-
+}
 
 #endif /* end of include guard: UNCOARSENING_XSN847F2 */

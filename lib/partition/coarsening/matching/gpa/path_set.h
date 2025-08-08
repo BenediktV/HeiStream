@@ -12,7 +12,7 @@
 #include "macros_assertions.h"
 #include "partition_config.h"
 #include "path.h"
-
+namespace heistream {
 class path_set {
         public:
 
@@ -225,5 +225,6 @@ inline bool path_set::add_if_applicable(const NodeID & source, const EdgeID & e)
         return false;
 } 
 
+}
 
 #endif /* end of include guard: PATH_SET_80E9CQT1 */

@@ -10,7 +10,7 @@
 
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
-
+namespace heistream {
 class initial_refinement {
 public:
         initial_refinement( );
@@ -20,6 +20,6 @@ public:
                       graph_access & G, 
                       EdgeWeight & initial_cut); 
 };
-
+}
 
 #endif /* end of include guard: INITIAL_REFINEMENT_LDIIF5CG */

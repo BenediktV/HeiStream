@@ -14,7 +14,7 @@
 #include "PartitionInfo_generated.h"
 #include "partition/partition_config.h"
 #include <iomanip>
-
+namespace heistream {
 class FlatBufferWriter {
 private:
     double io_time_;
@@ -167,5 +167,5 @@ public:
     }
 };
 
-
+}
 #endif //KAHIP_FLATBUFFERWRITER_H

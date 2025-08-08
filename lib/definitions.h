@@ -19,7 +19,7 @@
 #include "macros_assertions.h"
 #include "stdio.h"
 
-
+namespace heistream {
 // allows us to disable most of the output during partitioning
 #ifdef KAFFPAOUTPUT
         #define PRINT(x) x
@@ -295,6 +295,6 @@ inline uint32_t fnv2a(uint64_t eightBytes, uint32_t hash = Seed) {
 ////////////////// Hashing Function //////////////////
 /////////////////////// (end) ////////////////////////
 //////////////////////////////////////////////////////
-
+}
 #endif
 
