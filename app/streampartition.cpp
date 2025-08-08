@@ -79,6 +79,10 @@ int main(int argn, char **argv) {
                                     is_graph_weighted,
                                     suppress_output, recursive);
 
+
+    partition_config.use_reduced_graph = false;
+    partition_config.weight_current_cut_edges = false;
+
     if (ret_code) {
         return 0;
     }
