@@ -72,6 +72,12 @@ public:
     void writePartitionStream(PartitionConfig &config);
 
     static
+    LongEdgeID reestimateNumberEdges(PartitionConfig &partition_config);
+
+    static
+    void updateFennelConfig(PartitionConfig &partition_config, LongEdgeID updatedRemainingStreamEdges);
+
+    static
     void readFirstLineStream(PartitionConfig &partition_config, std::string graph_filename, EdgeWeight &total_edge_cut);
 
     static

@@ -95,6 +95,8 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
 
     setupForGhostNeighbors(config);
 
+    LongNodeID edgeCount = 0;
+
     for (node_counter = 0; node_counter < config.nmbNodes; node_counter++) {
         std::vector <LongNodeID> &line_numbers = (*input)[cursor];
         LongNodeID col_counter = 0;
@@ -118,6 +120,7 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
         while (col_counter < line_numbers.size()) {
             target = line_numbers[col_counter++];
             EdgeWeight edge_weight = 1;
+            edgeCount++;
             if (read_ew) {
                 edge_weight = line_numbers[col_counter++];
             }
@@ -160,7 +163,10 @@ graph_io_stream::createModel(PartitionConfig &config, graph_access &G, std::vect
     config.total_stream_nodecounter += config.nmbNodes;
     config.total_stream_nodeweight += total_nodeweight;
     config.remaining_stream_nodes -= config.nmbNodes;
-    config.remaining_stream_edges -= used_edges;
+    // config.remaining_stream_edges -= used_edges; // Is this irrelevant? remaining_stream_nodes only gets used in readFirstLineStream -> once initially, then never again
+    config.current_batch++;
+    config.already_streamed_edges += edgeCount/2;
+
 
     if (node_counter != (NodeID) config.nmbNodes + uncontracted_ghost_nodes + config.quotient_nodes) {
         std::cerr << "number of specified nodes mismatch" << std::endl;
@@ -751,6 +757,42 @@ void graph_io_stream::writePartitionStream(PartitionConfig &config) {
     std::cout << "--------------------------------" << std::endl;
 }
 
+LongEdgeID graph_io_stream::reestimateNumberEdges(PartitionConfig &partition_config) {
+    // For the last batch, the current-batch number should not be a whole number, but instead account for the size of the last batch which is usually smaller than the previous batches
+    double actualCurrentBatch = std::min((double)partition_config.current_batch, partition_config.number_batches);
+    LongEdgeID estimate_from_read_edges = partition_config.already_streamed_edges * partition_config.number_batches / actualCurrentBatch;
+    std::cout << "Number read edges: " << partition_config.already_streamed_edges << std::endl;
+    std::cout << "Estimate from read edges: " << estimate_from_read_edges << std::endl;
+    // Interpolate between the initial estimate and the estimate based on already read batches
+    // The more batches are already read, the larger the influence of the estimate from read edges
+    double interpolation_factor = actualCurrentBatch / (double)partition_config.number_batches;
+    std::cout << "Interpolating Edge Estimate with factor " << interpolation_factor << std::endl;
+    LongEdgeID new_edge_estimate = estimate_from_read_edges * interpolation_factor +
+                                  partition_config.initial_edge_estimate * (1.0 - interpolation_factor);
+
+    return new_edge_estimate;
+}
+
+void graph_io_stream::updateFennelConfig(PartitionConfig &partition_config, LongEdgeID updatedRemainingStreamEdges) {
+    std::cout << "Updating Edge Estimation to " << updatedRemainingStreamEdges << std::endl;
+    partition_config.remaining_stream_edges = updatedRemainingStreamEdges;
+
+    auto total_weight = partition_config.remaining_stream_nodes + 2 * partition_config.remaining_stream_edges;
+
+    if (partition_config.num_streams_passes > 1 + partition_config.restream_number) {
+        partition_config.stream_total_upperbound = ceil(
+                ((100 + 1.5 * partition_config.imbalance) / 100.) * (total_weight / (double) partition_config.k));
+    } else {
+        partition_config.stream_total_upperbound = ceil(
+                ((100 + partition_config.imbalance) / 100.) * (total_weight / (double) partition_config.k));
+    }
+
+    partition_config.fennel_alpha =
+            partition_config.remaining_stream_edges * std::pow(partition_config.k, partition_config.fennel_gamma - 1) /
+            (std::pow(partition_config.remaining_stream_nodes, partition_config.fennel_gamma));
+
+    partition_config.fennel_alpha_gamma = partition_config.fennel_alpha * partition_config.fennel_gamma;
+}
 
 void graph_io_stream::readFirstLineStream(PartitionConfig &partition_config, std::string graph_filename,
                                           EdgeWeight &total_edge_cut) {
@@ -781,6 +823,11 @@ void graph_io_stream::readFirstLineStream(PartitionConfig &partition_config, std
         partition_config.remaining_stream_nodes = partition_config.reduced_n;
         partition_config.remaining_stream_edges = partition_config.reduced_m;
         partition_config.graph_cursor = 0;
+        // partition_config.number_batches = std::ceil(partition_config.remaining_stream_nodes / (double) partition_config.stream_buffer_len);
+        partition_config.number_batches = partition_config.remaining_stream_nodes / (double) partition_config.stream_buffer_len;
+        partition_config.initial_edge_estimate = partition_config.remaining_stream_edges;
+        partition_config.current_batch = 0;
+        partition_config.already_streamed_edges = 0;
     }
 
     partition_config.total_nodes = partition_config.remaining_stream_nodes;
@@ -808,21 +855,7 @@ void graph_io_stream::readFirstLineStream(PartitionConfig &partition_config, std
     // auto total_weight = (partition_config.balance_edges) ? (partition_config.remaining_stream_nodes +
     //                                                         2 * partition_config.remaining_stream_edges)
     //                                                      : partition_config.remaining_stream_nodes;
-    auto total_weight = partition_config.remaining_stream_nodes + 2 * partition_config.remaining_stream_edges;
-
-    if (partition_config.num_streams_passes > 1 + partition_config.restream_number) {
-        partition_config.stream_total_upperbound = ceil(
-                ((100 + 1.5 * partition_config.imbalance) / 100.) * (total_weight / (double) partition_config.k));
-    } else {
-        partition_config.stream_total_upperbound = ceil(
-                ((100 + partition_config.imbalance) / 100.) * (total_weight / (double) partition_config.k));
-    }
-
-    partition_config.fennel_alpha =
-            partition_config.remaining_stream_edges * std::pow(partition_config.k, partition_config.fennel_gamma - 1) /
-            (std::pow(partition_config.remaining_stream_nodes, partition_config.fennel_gamma));
-
-    partition_config.fennel_alpha_gamma = partition_config.fennel_alpha * partition_config.fennel_gamma;
+    graph_io_stream::updateFennelConfig(partition_config, partition_config.remaining_stream_edges);
 
     partition_config.quotient_nodes = partition_config.k;
 

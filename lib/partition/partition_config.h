@@ -44,6 +44,11 @@ struct PartitionConfig
         std::vector<int>* previous_partitioning;
         int cut_edge_weight;
 
+        double number_batches;
+        int current_batch;
+        LongEdgeID initial_edge_estimate;
+        LongEdgeID already_streamed_edges;
+
         //============================================================
         //=======================MATCHING=============================
         //============================================================
