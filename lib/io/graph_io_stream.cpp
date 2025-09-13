@@ -774,7 +774,7 @@ LongEdgeID graph_io_stream::reestimateNumberEdges(PartitionConfig &partition_con
 }
 
 void graph_io_stream::updateFennelConfig(PartitionConfig &partition_config, LongEdgeID updatedRemainingStreamEdges) {
-    std::cout << "Updating Edge Estimation to " << updatedRemainingStreamEdges << std::endl;
+    // std::cout << "Updating Edge Estimation to " << updatedRemainingStreamEdges << std::endl;
     partition_config.remaining_stream_edges = updatedRemainingStreamEdges;
 
     auto total_weight = partition_config.remaining_stream_nodes + 2 * partition_config.remaining_stream_edges;
